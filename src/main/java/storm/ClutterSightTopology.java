@@ -33,6 +33,7 @@ public class ClutterSightTopology {
         tweetFilterQuery.track(new String[]{"Kardashian", "Elon", "Nike"});
 
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
+        builder.setBolt("file-writer", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
 
         Config conf = new Config();
         conf.setMaxTaskParallelism(3);

@@ -11,28 +11,34 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-
 public class FileWriterBolt extends BaseRichBolt {
     PrintWriter writer;
-    int count = 0;
+    int index = 0;
     private OutputCollector _collector;
     private String _filename;
 
     public FileWriterBolt(String filename){
-        _filename = filename;
+        this._filename = filename;
     }
 
     @Override
     public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector) {
         _collector = outputCollector;
-        writer = new PrintWriter(_filename, "UTF-8");
+        try {
+            writer = new PrintWriter(_filename, "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        
     }
 
     @Override
     public void execute(Tuple tuple) {
-        writer.println((count++)+":"+tuple);
+        writer.println((index++)+":"+tuple);
         writer.flush();
-
+        // Confirm that this tuple has been treated.
         _collector.ack(tuple);
 
     }
