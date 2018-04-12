@@ -4,11 +4,13 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
 import storm.bolts.*;
 import storm.spout.ClutterSightSpout;
 import twitter4j.FilterQuery;
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
 
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -33,7 +35,7 @@ public class ClutterSightTopology {
         tweetFilterQuery.track(new String[]{"Kardashian", "Elon", "Nike"});
 
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
-        builder.setBolt("file-writer", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
+        builder.setBolt("write", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
 
         Config conf = new Config();
         conf.setMaxTaskParallelism(3);
