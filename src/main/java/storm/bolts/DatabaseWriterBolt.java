@@ -13,13 +13,13 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-public class FileWriterBolt extends BaseRichBolt {
+public class DatabaseWriterBolt extends BaseRichBolt {
     PrintWriter writer;
     int index = 0;
     private OutputCollector _collector;
     private String _filename;
 
-    public FileWriterBolt(String filename){
+    public DatabaseWriterBolt(String filename){
         this._filename = filename;
     }
 
@@ -38,17 +38,16 @@ public class FileWriterBolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple tuple) {
-        writer.println("TWEET: " + tuple.getString(0));
+        writer.println(tuple.getString(0));
         writer.flush();
-        // Confirm that this tuple has been treated.
-        _collector.emit(tuple, new Values(tuple.getString(0)));
+
         _collector.ack(tuple);
 
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("tweet"));
+
     }
 
     @Override

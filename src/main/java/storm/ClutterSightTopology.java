@@ -36,6 +36,7 @@ public class ClutterSightTopology {
 
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
         builder.setBolt("write", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
+        builder.setBolt("db", new DatabaseWriterBolt("db.txt"), 1).shuffleGrouping("write");
 
         Config conf = new Config();
         conf.setMaxTaskParallelism(3);
