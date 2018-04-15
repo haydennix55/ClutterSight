@@ -67,7 +67,7 @@ public class ClutterSightTopology {
         //Define topology structure
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
         builder.setBolt("write", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
-        //builder.setBolt("db", new DatabaseWriterBolt(tableName, columnNames, columnTypes, dbURL, user, pass), 1).shuffleGrouping("write");
+        builder.setBolt("db", new DatabaseWriterBolt(tableName, columnNames, columnTypes, dbURL, user, pass), 1).shuffleGrouping("write");
 
         //Storm Config
         Config conf = new Config();
