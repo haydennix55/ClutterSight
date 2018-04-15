@@ -18,11 +18,10 @@ public class SQLMediator {
     private ArrayList<String> columnTypes_ = new ArrayList<String>();
 
     //cstr
-    public SQLMediator(Connection connection, String table, ArrayList<String> columnNames, ArrayList<String> columnTypes) {
+    public SQLMediator(Connection connection, String table, ArrayList<String> columnNames) {
         super();
         this.tableName_ = table;
         this.columnNames_ = columnNames;
-        this.columnTypes_ = columnTypes;
         this.connection_ = connection;
 
     }

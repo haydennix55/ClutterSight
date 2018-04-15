@@ -23,15 +23,12 @@ public class DatabaseWriterBolt implements IBasicBolt {
     private static transient SQLMediator mediator_ = null;
     private String tableName_ = null, dbURL_ = null, pass_ = null, user_ = null;
     private ArrayList<String> columnNames_ = new ArrayList<String>();
-    private ArrayList<String> columnTypes_ = new ArrayList<String>();
     private ArrayList<Object> fieldValues_ = new ArrayList<Object>();
 
-    public DatabaseWriterBolt(String tableName, ArrayList<String> columnNames,
-            ArrayList<String> columnTypes, String dbURL, String user, String pass) throws SQLException {
+    public DatabaseWriterBolt(String tableName, ArrayList<String> columnNames, String dbURL, String user, String pass) throws SQLException {
         super();
         this.tableName_ = tableName;
         this.columnNames_ = columnNames;
-        this.columnTypes_ = columnTypes;
         this.dbURL_ = dbURL;
         this.user_ = user_;
         this.pass_ = pass_;
@@ -44,7 +41,7 @@ public class DatabaseWriterBolt implements IBasicBolt {
         }
 
         //create mediator to interact with db via above connection
-        mediator_ = new SQLMediator(connection_, tableName, columnNames, columnTypes);
+        mediator_ = new SQLMediator(connection_, tableName, columnNames);
     }
 
     @Override

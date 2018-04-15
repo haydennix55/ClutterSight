@@ -41,14 +41,14 @@ public class FileWriterBolt extends BaseRichBolt {
         writer.println("TWEET: " + tuple.getString(0));
         writer.flush();
         // Confirm that this tuple has been treated.
-        _collector.emit(tuple, new Values(tuple.getString(0)));
+        _collector.emit(tuple, new Values(tuple.getString(0), 1, "test"));
         _collector.ack(tuple);
 
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("tweet"));
+        outputFieldsDeclarer.declare(new Fields("tweet", "sentiment", "sentiment_text"));
     }
 
     @Override

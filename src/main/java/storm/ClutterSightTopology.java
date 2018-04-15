@@ -34,29 +34,20 @@ public class ClutterSightTopology {
     private static String _tokenSecret = "uMti4rnmFv9mThyYfP8xM95oXCewOPP4XWA436cPQVaOz";
 
     //ClutterSight MySQL connection info
-    // private static String dbURL = "jdbc:mysql://localhost/ClutterSight";
-    // private static String user = "root";
-    // private static String pass = "CUBigD@t@18";
-
     private static String dbURL = "jdbc:mysql://localhost/ClutterSight";
     private static String user = "root";
-    private static String pass = "Dcsd128634";
+    private static String pass = "CUBigD@t@18";
 
     //Required fields to append to table
     private static ArrayList<String> columnNames = new ArrayList<String>();
-    private static ArrayList<String> columnTypes = new ArrayList<String>();
     private static String tableName = "tweets";
 
     public static void main(String[] args) throws Exception {
         LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.INFO);
 
         columnNames.add("tweet");
-        // columnNames.add("sentiment");
-        // columnNames.add("sentiment_text");
-
-        columnTypes.add("text");
-        // columnTypes.add("int");
-        // columnTypes.add("varchar(255)");
+        columnNames.add("sentiment");
+        columnNames.add("sentiment_text");
 
         TopologyBuilder builder = new TopologyBuilder();
 
@@ -67,7 +58,7 @@ public class ClutterSightTopology {
         //Define topology structure
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
         builder.setBolt("write", new FileWriterBolt("tweets.txt"), 1).shuffleGrouping("spout");
-        builder.setBolt("db", new DatabaseWriterBolt(tableName, columnNames, columnTypes, dbURL, user, pass), 1).shuffleGrouping("write");
+        builder.setBolt("db", new DatabaseWriterBolt(tableName, columnNames, dbURL, user, pass), 1).shuffleGrouping("write");
 
         //Storm Config
         Config conf = new Config();
