@@ -1,20 +1,9 @@
 <?php
- $connection = mysqli_connect ('localhost', 'root', 'root', 'bigdata');
- //$query = "SELECT sentiment, count(*) as number FROM tweets GROUP BY sentiment";
- //$result = mysqli_query($connect, $query);
- if(mysqli_connect_errno())
- {
- echo "<h4>Failed to connect to MySQL: </h4>".mysqli_connect_error();
- }
- else
- {
-   echo "<h2>WORKING!!</h2>";
- }
+ $connect = mysqli_connect ('localhost', 'root', 'root', 'bigdata');
+ $query = "SELECT COUNT(sentiment) as number FROM tweets GROUP BY sentiment;";
+ $result = mysqli_query($connect, $query);
  ?>
 
-
-
-<!--
  <!DOCTYPE html>
  <html>
       <head>
@@ -26,7 +15,8 @@
            function drawChart()
            {
                 var data = google.visualization.arrayToDataTable([
-                          ['sentiment', 'Number'],
+                          ['sentiment', 'number'],
+                          <?php
                           while($row = mysqli_fetch_array($result))
                           {
                                echo "['".$row["sentiment"]."', ".$row["number"]."],";
@@ -46,12 +36,9 @@
       <body>
            <br /><br />
            <div style="width:900px;">
-                <h3 align="center">Big Data Project!</h3>
+                <h1 align="center">ClutterSight</h1>
                 <br />
                 <div id="piechart" style="width: 900px; height: 500px;"></div>
            </div>
       </body>
  </html>
-
-
--->
