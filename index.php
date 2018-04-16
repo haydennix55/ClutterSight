@@ -1,5 +1,5 @@
 <?php
- $connection = mysqli_connect ('localhost', 'root', '', 'bigdata');
+ $connection = mysqli_connect ('localhost', 'root', 'root', 'bigdata');
  //$query = "SELECT sentiment, count(*) as number FROM tweets GROUP BY sentiment";
  //$result = mysqli_query($connect, $query);
  if(mysqli_connect_errno())
