@@ -1,6 +1,9 @@
 import csv
+import io
 
-ifile = open('/Users/oz346/Desktop/ClutterSight/parser/FullCorpus.csv', "rt", encoding = "utf8")
+ifile = open('FullCorpus.csv', "rt")
+#ifile = open('FullCorpus.csv', "rt", encoding = "utf8")
+
 reader = csv.reader(ifile)
 
 sentiments = []
@@ -22,4 +25,4 @@ for row in reader:
 ifile.close()
 
 for ii in range(10):
-    print("Senitment: ",sentiments[ii],", Tweet: ",tweets[ii])
+    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
