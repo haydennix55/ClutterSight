@@ -1,5 +1,6 @@
 import csv
 import io
+import re
 
 ifile = open('FullCorpus.csv', "rt")
 #ifile = open('FullCorpus.csv', "rt", encoding = "utf8")
@@ -19,10 +20,16 @@ for row in reader:
             if(header[colnum] == "Sentiment"):
                 sentiments.append(col)
             if(header[colnum] == "TweetText"):
-                tweets.append(col)
+                URLlessTweet = re.sub(r'https?:\/\/.*\s|\r', '', col)#, flags=re.MULTILINE)
+                tweets.append(URLlessTweet)
             colnum += 1
     rownum += 1
 ifile.close()
 
-for ii in range(10):
+for ii in range(100):
     print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
+
+print tweets[6]
+URLlessTweet = re.sub(r'https?:\/\/.*\s', '', tweets[6], flags=re.MULTILINE)
+print URLlessTweet
+#print tweets[6].split()
