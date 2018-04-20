@@ -1,10 +1,18 @@
 import csv
 import io
-import re
+import re as regex
+import nltk
+from nltk.tokenize import word_tokenize
+import string
+import preprocessor as p
+from nltk.corpus import stopwords
+#nltk.download('punkt')
+#nltk.download('stopwords')
 
 def Parse():
     ifile = open('FullCorpus.csv', "rt")
     #ifile = open('FullCorpus.csv', "rt", encoding = "utf8")
+    p.set_options(p.OPT.URL, p.OPT.EMOJI, p.OPT.MENTION, p.OPT.RESERVED,p.OPT.SMILEY,p.OPT.HASHTAG)
 
     reader = csv.reader(ifile)
 
@@ -21,9 +29,9 @@ def Parse():
                 if(header[colnum] == "Sentiment"):
                     sentiments.append(col)
                 if(header[colnum] == "TweetText"):
-                    URLlessTweet = re.sub(r'https?:\/\/.*\s|\r', '', col)#, flags=re.MULTILINE)
-                    URLlessTweet = re.sub(r'https?:\/\/.*$', '', URLlessTweet)#, flags=re.MULTILINE)
-                    tweets.append(URLlessTweet)
+                    CleanTweet = p.clean(col)
+
+                    tweets.append(CleanTweet)
                 colnum += 1
         rownum += 1
     ifile.close()
