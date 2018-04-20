@@ -96,19 +96,87 @@ of the tweet.</p>
 
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
-
     <div class="w3-container">
       <h3><b>Location of Tweets</b></h3>
-      <h5>Plotted Around the Country</h5>
-      <img style="width: 80%;" src="http://cdn.shopify.com/s/files/1/0977/4104/products/USA-XX-113467_ceed41f4-9fd3-43c8-b42e-c33783654dc7_grande.jpeg?v=1460587498">
-    </div>
+      <h5>Across the US</h5>
+    <!-- Styles -->
+      <style>
+        body { background-color: #30303d; color: #fff; }
+        #chartdiv {
+        width: 100%;
+        height: 500px;
+      }
+      </style>
+
+      <!-- Resources -->
+      <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+      <script src="https://www.amcharts.com/lib/3/maps/js/usaLow.js"></script>
+      <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+      <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css"/>
+      <script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
+
+      <!-- Chart code -->
+      <script>
+      var map = AmCharts.makeChart( "chartdiv", {
+        "type": "map",
+      "theme": "dark",
+
+        "panEventsEnabled": true,
+        //"backgroundColor": "#666666",
+        //"backgroundAlpha": 1,
+        "dataProvider": {
+          "map": "usaLow",
+          "getAreasFromMap": true
+        },
+        "areasSettings": {
+          "autoZoom": false,
+          "color": "#CDCDCD",
+          "colorSolid": "#5EB7DE",
+          "selectedColor": "#5EB7DE",
+          "outlineColor": "#666666",
+          "rollOverColor": "#0084b4",
+          "rollOverOutlineColor": "#FFFFFF",
+          "selectable": false
+        },
+        "listeners": [ {
+          "event": "clickMapObject",
+          "method": function( event ) {
+            // deselect the area by assigning all of the dataProvider as selected object
+            map.selectedObject = map.dataProvider;
+
+            // toggle showAsSelected
+            event.mapObject.showAsSelected = !event.mapObject.showAsSelected;
+
+            // bring it to an appropriate color
+            map.returnInitialColor( event.mapObject );
+
+            // let's build a list of currently selected states
+            var states = [];
+            for ( var i in map.dataProvider.areas ) {
+              var area = map.dataProvider.areas[ i ];
+              if ( area.showAsSelected ) {
+                states.push( area.title );
+              }
+            }
+          }
+        } ],
+        "export": {
+          "enabled": true
+        }
+      } );
+      </script>
+
+      <!-- HTML -->
+      <div id="chartdiv"></div>
 
     <div class="w3-container" style="padding: 20px;">
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>Based on the keywords of the tweet, along with their corresponding rating of "positive", "negative", and "neutral", this map shows the areas that have tweets containing the keywords. Furthermore,
+      the map shows whether that specific location has an overall positive, neutral, or negative sound regarding the keyword of the tweets. </p>
 
     </div>
-  </div>
+    </div>
+</div>
+
 <!-- END BLOG ENTRIES -->
 </div>
 
