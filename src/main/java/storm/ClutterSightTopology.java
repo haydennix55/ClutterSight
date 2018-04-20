@@ -54,6 +54,7 @@ public class ClutterSightTopology {
         //Define tweet filter and keywords
         FilterQuery tweetFilterQuery = new FilterQuery();
         tweetFilterQuery.track(new String[]{"Facebook", "Zuckerberg"});
+        tweetFilterQuery.language("en");
 
         //Define topology structure
         builder.setSpout("spout", new ClutterSightSpout(_apiKey, _apiSecret, _token, _tokenSecret, tweetFilterQuery), 1);
