@@ -41,7 +41,7 @@ def Parse():
     ifile.close()
     return sentiments,tweets
 
-sentiments,tweets = Parse()
+#sentiments,tweets = Parse()
 
 #for ii in range(100):
 #    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
