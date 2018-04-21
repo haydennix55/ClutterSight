@@ -1,4 +1,5 @@
 import csv
+import numpy as np
 import io
 import re as regex
 import nltk
@@ -16,8 +17,9 @@ def Parse():
 
     reader = csv.reader(ifile)
 
-    sentiments = []
-    tweets = []
+    sentiments = np.empty([5113],dtype = object)
+    tweets = np.empty([5113],dtype = object)
+    iter = 0
 
     rownum = 0
     for row in reader:
@@ -27,19 +29,22 @@ def Parse():
             colnum = 0
             for col in row:
                 if(header[colnum] == "Sentiment"):
-                    sentiments.append(col)
+                    sentiments[iter] = col
                 if(header[colnum] == "TweetText"):
-                    CleanTweet = p.clean(col)
+                    CleanTweet = p.clean(col).encode('utf-8')
 
-                    tweets.append(CleanTweet)
+
+                    tweets[iter] = CleanTweet
+                    iter +=1
                 colnum += 1
         rownum += 1
     ifile.close()
     return sentiments,tweets
 
 sentiments,tweets = Parse()
-for ii in range(100):
-    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
+
+#for ii in range(100):
+#    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
 
 
 #print tweets[6].split()
