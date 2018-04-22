@@ -17,9 +17,13 @@ def Parse():
 
     reader = csv.reader(ifile)
 
-    sentiments = np.empty([5113],dtype = object)
-    tweets = np.empty([5113],dtype = object)
+    sentiments = np.empty([2193],dtype = object)
+    tweets = np.empty([2193],dtype = object)
     iter = 0
+    neutralCount = 0
+    irrelevantCount = 0
+    TweetFlag = True
+
 
     rownum = 0
     for row in reader:
@@ -29,16 +33,32 @@ def Parse():
             colnum = 0
             for col in row:
                 if(header[colnum] == "Sentiment"):
-                    sentiments[iter] = col
-                if(header[colnum] == "TweetText"):
+                    if(col == "neutral"):
+                        #Keep neutral counts from out-weighing others
+                        if(neutralCount < 551):
+                            sentiments[iter] = col
+                            neutralCount +=1
+                            TweetFlag = False
+                    elif(col == "irrelevant"):
+                        #Keep irrelevant counts from out-weighing others
+                        if(irrelevantCount < 551):
+                            sentiments[iter] = col
+                            irrelevantCount +=1
+                            TweetFlag = False
+                    else:
+                        sentiments[iter] = col
+                        TweetFlag = False
+                if(header[colnum] == "TweetText" and TweetFlag == False):
                     CleanTweet = p.clean(col).encode('utf-8')
-
 
                     tweets[iter] = CleanTweet
                     iter +=1
+                    TweetFlag = True
                 colnum += 1
         rownum += 1
     ifile.close()
+    #print neutralCount,irrelevantCount
+    #print len(sentiments)
     return sentiments,tweets
 
 #sentiments,tweets = Parse()

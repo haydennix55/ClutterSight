@@ -41,5 +41,5 @@ def predict(text_list):
     for ii in range(len(text_list)):
         PredLabels.append(np.argmax(predict_log_score(text_list[ii])))
     return PredLabels
-PredLabels = predict(["fuck fuck fuck","I hate this computer","why even buy this"])
+PredLabels = predict(["this phone is so amazing please get it","this is a peice of junk","why even buy this"])
 print PredLabels
