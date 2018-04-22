@@ -18,13 +18,13 @@ def predict_log_score(text_str):
     words = text_str.split()
 
     for c in range(num_classes):
-        print "prior: ",class_counts[c],np.sum(class_counts)
-        print "alpha: ",alpha
-        class_scores[c] = np.log((class_counts[c]+alpha)/(np.sum(class_counts)+(alpha*num_classes)))
+        #print "prior: ",class_counts[c]+alpha,np.sum(class_counts)+alpha
+        #print "log: ",float(float(class_counts[c]+alpha)/float(np.sum(class_counts)+(alpha*num_classes)))
+        class_scores[c] = np.log(float(class_counts[c]+alpha)/float(np.sum(class_counts)+(alpha*num_classes)))
         for word in words:
             if(word in vocab):
-                print "(#",word," in class/Total terms in class): ",feature_counts[c,vocab[word]],np.sum(feature_counts[c])
-                class_scores[c] += np.log((feature_counts[c,vocab[word]]+alpha)/(np.sum(feature_counts[c])+(len(vocab)*alpha)))
+                #print "(#",word," in class/Total terms in class): ",feature_counts[c,vocab[word]],np.sum(feature_counts[c])
+                class_scores[c] += np.log(float(feature_counts[c,vocab[word]]+alpha)/float(np.sum(feature_counts[c])+(len(vocab)*alpha)))
             else:
                 class_scores[c] +=0
 
@@ -37,12 +37,9 @@ def predict(text_list):
 
     :param text_list: a list or ndarray of text strings to make predictions on
     """
-    yhat = np.zeros(len(text_list), dtype=int)
+    PredLabels = []
     for ii in range(len(text_list)):
-        predictions = predict_log_score(text_list[ii])
-        if(predictions[0]<predictions[1]):
-            yhat[ii]=1
-        else:
-            yhat[ii]=0
-    return yhat
-predict(["greatest"])
+        PredLabels.append(np.argmax(predict_log_score(text_list[ii])))
+    return PredLabels
+PredLabels = predict(["fuck fuck fuck","I hate this computer","why even buy this"])
+print PredLabels
