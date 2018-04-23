@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Set;
+import twitter4j.*;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class FileWriterBolt extends BaseRichBolt {
     PrintWriter writer;
@@ -38,17 +41,20 @@ public class FileWriterBolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple tuple) {
-        writer.println("TWEET: " + tuple.getString(0));
+        Status tweet = (Status) tuple.getValueByField("tweet");
+        String loc = tweet.getUser().getLocation();
+
+        writer.println("TWEET: " + tweet.getText());
         writer.flush();
         // Confirm that this tuple has been treated.
-        _collector.emit(tuple, new Values(tuple.getString(0), 1, "test"));
+        _collector.emit(tuple, new Values(tweet.getText(), 1, "test", loc));
         _collector.ack(tuple);
 
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("tweet", "sentiment", "sentiment_text"));
+        outputFieldsDeclarer.declare(new Fields("tweet", "sentiment", "sentiment_text", "location"));
     }
 
     @Override
