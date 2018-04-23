@@ -15,7 +15,6 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class ClutterSightSpout extends BaseRichSpout {
 
-    public static String MESSAGE = "";
     private String _apiKey;
     private String _apiSecret;
     private String _token;
@@ -24,7 +23,7 @@ public class ClutterSightSpout extends BaseRichSpout {
     private TwitterStream _tweetStream;
     private FilterQuery _tweetFilterQuery;
     private SpoutOutputCollector _collector;
-    private LinkedBlockingQueue _tweets;
+    private LinkedBlockingQueue<Status> _tweets;
 
     public ClutterSightSpout(String apiKey, String apiSecret, String token, String tokenSecret) {
         _apiKey = apiKey;
@@ -40,12 +39,12 @@ public class ClutterSightSpout extends BaseRichSpout {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields(MESSAGE));
+        outputFieldsDeclarer.declare(new Fields("tweet"));
     }
 
     @Override
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
-        _tweets = new LinkedBlockingQueue();
+        _tweets = new LinkedBlockingQueue<Status>(1000);
         _collector = spoutOutputCollector;
 
         ConfigurationBuilder _configurationBuilder = new ConfigurationBuilder();
@@ -57,7 +56,7 @@ public class ClutterSightSpout extends BaseRichSpout {
         _tweetStream.addListener(new StatusListener() {
             @Override
             public void onStatus(Status status) {
-                _tweets.offer(status.getText());
+                _tweets.offer(status);
             }
 
             @Override
@@ -82,7 +81,7 @@ public class ClutterSightSpout extends BaseRichSpout {
 
             @Override
             public void onException(Exception ex) {
-                
+
             }
         });
         if (_tweetFilterQuery == null) {
@@ -99,11 +98,11 @@ public class ClutterSightSpout extends BaseRichSpout {
      */
     @Override
     public void nextTuple() {
-        Object s = _tweets.poll();
-        if (s == null) {
+        Status status = _tweets.poll();
+        if (status == null) {
             Utils.sleep(500);
         } else {
-            _collector.emit(new Values(s));
+            _collector.emit(new Values(status));
 
         }
     }
