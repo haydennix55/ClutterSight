@@ -48,6 +48,7 @@ public class ClutterSightTopology {
         columnNames.add("tweet");
         columnNames.add("sentiment");
         columnNames.add("sentiment_text");
+        columnNames.add("location");
 
         TopologyBuilder builder = new TopologyBuilder();
 
