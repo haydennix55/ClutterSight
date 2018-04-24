@@ -12,10 +12,12 @@
            <script type="text/javascript">
            google.charts.load('current', {'packages':['corechart']});
            google.charts.setOnLoadCallback(drawChart);
+           // Draws Pie Chart
            function drawChart()
            {
                 var data = google.visualization.arrayToDataTable([
                           ['sentiment', 'number'],
+                          //reads in numbers from database
                           <?php
                           while($row = mysqli_fetch_array($result))
                           {
