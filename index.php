@@ -65,9 +65,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <!-- Grid -->
 <div class="w3-row">
 
-<!-- Blog entries -->
 <div class="w3-col l8 s12">
-  <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
 
 
@@ -76,8 +74,6 @@ and is wrapped around the whole page content, except for the footer in this exam
                 <br />
                 <div id="piechart" style="width: 80%; height: 290px; padding-left: 100px; text-align:left;"></div>
                 <a style="padding-left: 30px;" href="http://tinypic.com?ref=4rcpqp" target="_blank"><img src="http://i65.tinypic.com/4rcpqp.jpg" border="0" alt="Image"></a></div>
-
-
 	<div class="w3-container" style="padding: 20px 20px 0px 20px">
 
       <h5>Analytic description</h5>
@@ -94,7 +90,7 @@ of the tweet.</p>
   </div>
   <hr>
 
-  <!-- Blog entry -->
+  <!-- US map -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
       <h3><b>Location of Tweets</b></h3>
@@ -115,7 +111,7 @@ of the tweet.</p>
       <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css"/>
       <script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
 
-      <!-- Chart code -->
+      <!-- Chart code for US map -->
       <script>
       var map = AmCharts.makeChart( "chartdiv", {
         "type": "map",
@@ -177,10 +173,9 @@ of the tweet.</p>
     </div>
 </div>
 
-<!-- END BLOG ENTRIES -->
+<!-- Right side of page -->
 </div>
 
-<!-- Introduction menu -->
 <div class="w3-col l4">
   <!-- About Card -->
   <div class="w3-card-2 w3-margin w3-margin-top">
@@ -193,7 +188,7 @@ of the tweet.</p>
     </div>
   </div><hr>
 
-  <!-- Posts -->
+  <!-- Team member section -->
   <div class="w3-card-2 w3-margin-top">
 <!--
     <div class="w3-container w3-padding">
