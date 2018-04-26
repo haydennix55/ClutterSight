@@ -47,7 +47,7 @@ public class FileWriterBolt extends BaseRichBolt {
         writer.println("TWEET: " + tweet.getText());
         writer.flush();
         // Confirm that this tuple has been treated.
-        _collector.emit(tuple, new Values(tweet.getText(), 1, "test", loc));
+        _collector.emit(tuple, new Values(tweet.getText(), null, null, loc));
         _collector.ack(tuple);
 
     }
