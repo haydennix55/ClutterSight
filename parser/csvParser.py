@@ -1,19 +1,10 @@
+from TweetCleaning import TweetCleaning
 import csv
 import numpy as np
-import io
-import re as regex
-import nltk
-from nltk.tokenize import word_tokenize
-import string
-import preprocessor as p
-from nltk.corpus import stopwords
-#nltk.download('punkt')
-#nltk.download('stopwords')
+
 
 def Parse():
     ifile = open('FullCorpus.csv', "rt")
-    #ifile = open('FullCorpus.csv', "rt", encoding = "utf8")
-    p.set_options(p.OPT.URL, p.OPT.EMOJI, p.OPT.MENTION, p.OPT.RESERVED,p.OPT.SMILEY,p.OPT.HASHTAG)
 
     reader = csv.reader(ifile)
 
@@ -49,22 +40,18 @@ def Parse():
                         sentiments[iter] = col
                         TweetFlag = False
                 if(header[colnum] == "TweetText" and TweetFlag == False):
-                    CleanTweet = p.clean(col).encode('utf-8')
-
-                    tweets[iter] = CleanTweet
+                    tweets[iter] = TweetCleaning(col)
                     iter +=1
                     TweetFlag = True
                 colnum += 1
         rownum += 1
     ifile.close()
-    #print neutralCount,irrelevantCount
-    #print len(sentiments)
+    
     return sentiments,tweets
 
-#sentiments,tweets = Parse()
-
-#for ii in range(100):
-#    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
+sentiments,tweets = Parse()
+for ii in range(100):
+    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
 
 
 #print tweets[6].split()

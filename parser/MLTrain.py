@@ -2,12 +2,11 @@ from csvParser import Parse
 import numpy as np
 
 
-def train():
+def train(y_train, text_train):
 
     """
     Learn the vocabularly, class_counts, and feature counts from the training data
     """
-    y_train, text_train = Parse()
 
     for ii in range(len(y_train)):
         if(y_train[ii] == "positive"):
@@ -33,8 +32,8 @@ def train():
     #print(self.text_train)
     VCount = 0
     for sentence in text_train:
-        split = sentence.split()
-        for word in split:
+        #split = sentence.split()
+        for word in sentence:
             if(word not in vocab):
                 vocab[word] = VCount
                 VCount +=1
@@ -53,8 +52,8 @@ def train():
 
     feature_counts = np.zeros((num_classes, len(vocab)), dtype=int)
     for ii in range(text_train.shape[0]):
-        split = text_train[ii].split()
-        for word in split:
+        #split = text_train[ii].split()
+        for word in text_train[ii]:
             #print(self.feature_counts.shape)
             #print(self.y_train[ii],self.vocab[word])
             feature_counts[y_train[ii],vocab[word]] +=1
