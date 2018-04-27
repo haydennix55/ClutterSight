@@ -69,7 +69,7 @@ public class ClutterSightTopology {
 
         //Submit topology and wait, then kill (otherwise stream will run forever)
         cluster.submitTopology("tweet-stream", conf, builder.createTopology());
-        Utils.sleep(600000);
+        Utils.sleep(25000);
         cluster.shutdown();
     }
 }
