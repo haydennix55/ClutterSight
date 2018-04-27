@@ -1,1 +1,7 @@
-# ClutterSight
+# ClutterSight   [![Build Status](https://travis-ci.com/haydennix55/ClutterSight.svg?token=wwBuybqxMxpYFfnA9HqE&branch=master)](https://travis-ci.com/haydennix55/ClutterSight)
+
+ClutterSight a tool designed to help people make sense of their social media feedback. When consumers mention or interact with your company, product, service, etc. on social media dozens of times a second, it can be difficult to learn anything from the responses. There are many irrelevant, neuteral, or just plain unreadable posts, and they can shroud the meaningful comments, criticism, complaints, praises, and reports, making them useless and leading to lower CSAT overall. ClutterSight reads in tweets live, filters out irrelevant or nonsensical tweets, and uses machine learning to analyze the sentiment. It also uses geographic data to generalize where tweets about the user are coming from. This information can help get a general understanding of public opinion over a current (up-to-date) or historical timeframe. 
+
+## Goals
+
+Eventually, the goal of ClutterSight is to provide comprehensive analysis of social media feedback to a user across all social media platforms. This would include general opinions, common complaints or praises, heatmaps of sentiment, and more. It will allow the user to narrow or broaden their search terms, timeframe, etc. and will log historical information for time series measurements. Of course, it would stay live and be able to alert when things change dramatically to prevent PR nightmares, build on the success of well accepted feature, etc.
