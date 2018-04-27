@@ -1,0 +1,33 @@
+language: java
+os:
+  - linux
+
+script:
+  -  mvn compile --quiet exec:java -Dexec.classpathScope=compile -Dexec.mainClass=storm.ClutterSightTopology -Dexec.cleanupDaemonThreads=false
+
+notifications:
+    email:
+        recipients:
+            - hani2284@colorado.edu
+            - 7208847579@vtext.com
+        on_success: change
+        on_failure: always
+        on_error: always
+        on_pull_requests: false
+
+sudo: required
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
+
+before_script:
+  - mysql_upgrade --force -u root --password=""
+  - mysql -u root --password="" < test/travis.sql
