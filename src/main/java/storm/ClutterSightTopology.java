@@ -38,6 +38,12 @@ public class ClutterSightTopology {
     private static String user = "root";
     private static String pass = "CUBigData18";
 
+    /** DEV DATABASE INFO
+    private static String dbURL = "jdbc:mysql://localhost/ClutterSight";
+    private static String user = "root";
+    private static String pass = "CUBigD@t@18";
+    */
+
     //Required fields to append to table
     private static ArrayList<String> columnNames = new ArrayList<String>();
     private static String tableName = "tweets";
