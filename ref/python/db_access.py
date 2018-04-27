@@ -2,9 +2,9 @@
 import mysql.connector
 
 # SQL auth
-hostname = 'localhost'
+hostname = 'cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com'
 username = 'root'
-password = 'CUBigD@t@18'
+password = 'CUBigData18'
 database = 'ClutterSight'
 
 # Read in id, tweet, sentiment, sentiment_text for unlabeled tweets
@@ -46,7 +46,6 @@ tweet_arr = tweetsIn( conn_ )
 # Replace with ML sentiment analysis assignment
 for row in tweet_arr:
     # assess sentiment
-    print row
     row[2] = 1
     row[3] = "analyzed"
 
