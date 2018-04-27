@@ -3,7 +3,7 @@ os:
   - linux
 
 script:
-  -  mvn compile --quiet exec:java -Dexec.classpathScope=compile -Dexec.mainClass=storm.ClutterSightTopology -Dexec.cleanupDaemonThreads=false
+  -  mvn compile --quiet exec:java -Dexec.classpathScope=compile -Dexec.mainClass=storm.ClutterSightTopology -Dexec.args="dev" -Dexec.cleanupDaemonThreads=false
 
 notifications:
     email:
@@ -16,3 +16,18 @@ notifications:
         on_pull_requests: false
 
 sudo: required
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
+
+before_script:
+  - mysql_upgrade --force -u root --password=""
+  - mysql -u root --password="" < test/travis.sql

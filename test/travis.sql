@@ -1,5 +1,5 @@
 # Create Testuser
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'CUBigD@t@18';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'CUBigData18';
 
 # Create db
 CREATE DATABASE IF NOT EXISTS ClutterSight;
