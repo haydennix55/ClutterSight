@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.net.InetAddress;
 
 
 public class ClutterSightTopology {
@@ -34,9 +35,9 @@ public class ClutterSightTopology {
     private static String _tokenSecret = "uMti4rnmFv9mThyYfP8xM95oXCewOPP4XWA436cPQVaOz";
 
     //ClutterSight MySQL connection info
-    private static String dbURL = "jdbc:mysql://localhost/ClutterSight";
+    private static String dbURL;
     private static String user = "root";
-    private static String pass = "CUBigD@t@18";
+    private static String pass = "CUBigData18";
 
     //Required fields to append to table
     private static ArrayList<String> columnNames = new ArrayList<String>();
@@ -44,6 +45,12 @@ public class ClutterSightTopology {
 
     public static void main(String[] args) throws Exception {
         LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.INFO);
+
+        if (args[0].equals("prod"))
+          dbURL = "jdbc:mysql://cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com:3306/ClutterSight";
+        else
+          dbURL = "jdbc:mysql://localhost/ClutterSight";
+
 
         columnNames.add("tweet");
         columnNames.add("sentiment");

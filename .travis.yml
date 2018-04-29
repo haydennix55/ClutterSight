@@ -3,7 +3,7 @@ os:
   - linux
 
 script:
-  -  mvn compile --quiet exec:java -Dexec.classpathScope=compile -Dexec.mainClass=storm.ClutterSightTopology -Dexec.cleanupDaemonThreads=false
+  -  mvn compile --quiet exec:java -Dexec.classpathScope=compile -Dexec.mainClass=storm.ClutterSightTopology -Dexec.args="dev" -Dexec.cleanupDaemonThreads=false
 
 notifications:
     email:
