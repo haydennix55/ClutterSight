@@ -4,7 +4,7 @@ import numpy as np
 
 
 def Parse():
-    ifile = open('FullCorpus.csv', "rt")
+    ifile = open('PythonML/FullCorpus.csv', "rt")
 
     reader = csv.reader(ifile)
 
