@@ -1,4 +1,5 @@
 target/
 .DS_Store
 tweets.txt
-db.txt
+db.txt\
+*.pyc
