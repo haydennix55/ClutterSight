@@ -37,7 +37,7 @@ public class ClutterSightTopology {
     //ClutterSight MySQL connection info
     private static String dbURL;
     private static String user = "root";
-    private static String pass = "Dcsd128634";
+    private static String pass = "CUBigData18";
 
     //Required fields to append to table
     private static ArrayList<String> columnNames = new ArrayList<String>();
