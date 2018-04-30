@@ -3,3 +3,4 @@ target/
 tweets.txt
 db.txt\
 *.pyc
+*.pem
