@@ -8,7 +8,7 @@ username = 'root'
 password = 'CUBigData18'
 database = 'ClutterSight'
 
-if sys.argv[0] == prod:
+if sys.argv[1] == 'prod':
     hostname = 'cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com'
 else:
     hostname = 'localhost'
