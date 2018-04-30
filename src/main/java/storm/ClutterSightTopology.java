@@ -61,7 +61,7 @@ public class ClutterSightTopology {
 
         //Define tweet filter and keywords
         FilterQuery tweetFilterQuery = new FilterQuery();
-        tweetFilterQuery.track(new String[]{"Apple", "iPhone", "iPad"});
+        tweetFilterQuery.track(new String[]{"facebook","zuckerberg","snapchat","oculus","instagram"});
         tweetFilterQuery.language("en");
 
         //Define topology structure

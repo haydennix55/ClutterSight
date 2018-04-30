@@ -1,6 +1,6 @@
 <?php
- $connect = mysqli_connect ('localhost', 'root', 'root', 'bigdata');
- $query = "SELECT COUNT(sentiment) as number FROM tweets GROUP BY sentiment;";
+ $connect = mysqli_connect ('cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com', 'root', 'CUBigData18', 'ClutterSight');
+ $query = "SELECT number from (SELECT COUNT(sentiment) as number, sentiment FROM tweets GROUP BY sentiment) as counter where sentiment <> 2;";
  $result = mysqli_query($connect, $query);
  ?>
 
