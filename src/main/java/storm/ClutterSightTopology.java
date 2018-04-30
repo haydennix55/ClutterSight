@@ -61,7 +61,7 @@ public class ClutterSightTopology {
 
         //Define tweet filter and keywords
         FilterQuery tweetFilterQuery = new FilterQuery();
-        tweetFilterQuery.track(new String[]{"Facebook", "Zuckerberg"});
+        tweetFilterQuery.track(new String[]{"Apple", "iPhone", "iPad"});
         tweetFilterQuery.language("en");
 
         //Define topology structure
@@ -76,7 +76,11 @@ public class ClutterSightTopology {
 
         //Submit topology and wait, then kill (otherwise stream will run forever)
         cluster.submitTopology("tweet-stream", conf, builder.createTopology());
-        Utils.sleep(25000);
+        if (args[0].equals("prod")) {
+          Utils.sleep(60000);
+        } else {
+          Utils.sleep(25000);
+        }
         cluster.shutdown();
     }
 }

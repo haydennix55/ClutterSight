@@ -1,12 +1,18 @@
 #!/usr/bin/python
 import mysql.connector
+import sys
 from TweetPrediction import predict
 
 # SQL auth
-hostname = 'cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com'
 username = 'root'
 password = 'CUBigData18'
 database = 'ClutterSight'
+
+if sys.argv[1] == 'prod':
+    hostname = 'cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com'
+else:
+    hostname = 'localhost'
+
 
 # Read in id, tweet, sentiment, sentiment_text for unlabeled tweets
 # @param conn - mysql.connector connection
