@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import mysql.connector
+from TweetPrediction import predict
 
 # SQL auth
 hostname = 'cluttersightdb.cxh7qnwh9vpl.us-west-2.rds.amazonaws.com'
@@ -43,11 +44,7 @@ def tweetsOut( conn, tweet_arr ):
 conn_ = mysql.connector.connect( host=hostname, user=username, passwd=password, db=database )
 tweet_arr = tweetsIn( conn_ )
 
-# Replace with ML sentiment analysis assignment
-for row in tweet_arr:
-    # assess sentiment
-    row[2] = 1
-    row[3] = "analyzed"
+predict(tweet_arr)
 
 tweetsOut(conn_, tweet_arr)
 conn_.close()

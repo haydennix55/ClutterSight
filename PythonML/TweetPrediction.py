@@ -3,7 +3,7 @@ from MLTrain import train
 import numpy as np
 
 
-def predict_log_score(text_str):
+def predict_log_score(text_str,feature_counts,class_counts,vocab,num_classes,alpha):
     """
     Get the log-probability score for each class
     for a query string
@@ -27,22 +27,34 @@ def predict_log_score(text_str):
     return class_scores
 
 
-def predict(text_list):
+def predict(tweet_arr):
     """
     Predict the class of each example in text_list
     :param text_list: a list or ndarray of text strings to make predictions on
     """
-    PredLabels = []
-    for ii in range(len(text_list)):
-        PredLabels.append(np.argmax(predict_log_score(text_list[ii])))
-    return PredLabels
+    y_train, text_train = Parse()
+    feature_counts,class_counts,vocab = train(y_train,text_train)
+    num_classes = len(class_counts)
+    alpha = 1
 
-y_train, text_train = Parse()
-feature_counts,class_counts,vocab = train(y_train,text_train)
-num_classes = len(class_counts)
-alpha = 1
+    for ii in range(len(tweet_arr)):
+        PredLabel = np.argmax(predict_log_score(tweet_arr[ii][1],feature_counts,class_counts,vocab,num_classes,alpha))
+        if(PredLabel == 0):
+            tweet_arr[ii][2] = -1
+            tweet_arr[ii][3] = "negative"
+        elif(PredLabel == 1):
+            tweet_arr[ii][2] = 1
+            tweet_arr[ii][3] = "positive"
+        elif(PredLabel == 2):
+            tweet_arr[ii][2] = 0
+            tweet_arr[ii][3] = "neutral"
+        else:
+            tweet_arr[ii][2] = 2
+            tweet_arr[ii][3] = "irrelevant"
+    return tweet_arr
 
 
 
-PredLabels = predict(["this phone is so amazing please get it","I fuck hate this is a peice of junk","why even buy this"])
-print PredLabels
+
+#PredLabels = predict(["this phone is so amazing please get it","I fuck hate this is a peice of junk","why even buy this"])
+#print PredLabels

@@ -46,12 +46,12 @@ def Parse():
                 colnum += 1
         rownum += 1
     ifile.close()
-    
+
     return sentiments,tweets
 
-sentiments,tweets = Parse()
-for ii in range(100):
-    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
+#sentiments,tweets = Parse()
+#for ii in range(100):
+#    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
 
 
 #print tweets[6].split()
