@@ -58,8 +58,8 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 <!-- Header -->
 <header class="w3-container w3-center w3-padding-32">
-  <h1 style="font-size:55px;"><b>ClutterSight</b></h1>
-  <h4 style="font-size: 20px;">Your Social Media Data Analyst</h4>
+  <h1 style="font-size:55px;"><b><img src="http://i65.tinypic.com/2mha6hy.png" border="0" style="width: 500px;"></b></h1>
+  <h4 style="font-size: 20px;">Social Media Data Analyst</h4>
 </header>
 
 <!-- Grid -->
@@ -74,6 +74,7 @@ and is wrapped around the whole page content, except for the footer in this exam
                 <br />
                 <div id="piechart" style="width: 80%; height: 290px; padding-left: 100px; text-align:left;"></div>
                 <a style="padding-left: 30px;" href="http://tinypic.com?ref=4rcpqp" target="_blank"><img src="http://i65.tinypic.com/4rcpqp.jpg" border="0" alt="Image"></a></div>
+
 	<div class="w3-container" style="padding: 20px 20px 0px 20px">
 
       <h5>Analytic description</h5>
@@ -179,12 +180,11 @@ of the tweet.</p>
 <div class="w3-col l4">
   <!-- About Card -->
   <div class="w3-card-2 w3-margin w3-margin-top">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaa4WunlQgON4rc74oHygTzY6-hDinlWucPBt5MUetG2ua3zfC" style="width:100%">
+  <img src="http://i66.tinypic.com/2whm2wo.png" width="100%" border="0">
     <div class="w3-container w3-white" style="padding: 20px;">
       <h4><b>About the Project</b></h4>
-      <p>Cluttersight was created to provide a way for companies to see how the public views them on Social Media - specifically on Twitter. Cluttersight uses machine
-      learning analytics to search tweets about a company and display the percentage of "good", "bad", and "neutral" sounding tweets that contain the company or person's
-      name. This gives people a unique way to conceptualize how the public views their company.</p>
+      <p>ClutterSight is designed to provide a way for customers to see how the public views them on social media, specifically Twitter. ClutterSight uses real-time streaming to pull in tweets that mention, tag, or are connected to a company, person, or other client. Using machine learning, we determine relevance and sentiment, and store it for live and historical use. This gives people a unique way to conceptualize how the public views their company and how that view changes.
+</p>
     </div>
   </div><hr>
 
