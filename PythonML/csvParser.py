@@ -7,7 +7,7 @@ def Parse():
     ifile = open('FullCorpus.csv', "rt")
 
     reader = csv.reader(ifile)
-
+    #initialize np arrays
     sentiments = np.empty([2193],dtype = object)
     tweets = np.empty([2193],dtype = object)
     iter = 0
@@ -52,6 +52,3 @@ def Parse():
 #sentiments,tweets = Parse()
 #for ii in range(100):
 #    print"Senitment: ",sentiments[ii],", Tweet: ",tweets[ii]
-
-
-#print tweets[6].split()

@@ -7,19 +7,17 @@ def predict_log_score(text_str,feature_counts,class_counts,vocab,num_classes,alp
     """
     Get the log-probability score for each class
     for a query string
+
     :param text_str: a single string of text to compute the log_score for
     """
 
     class_scores = np.zeros(num_classes)
     words = text_str.split()
-
+    #Naive bayes algorithm for calculating score
     for c in range(num_classes):
-        #print "prior: ",class_counts[c]+alpha,np.sum(class_counts)+alpha
-        #print "log: ",float(float(class_counts[c]+alpha)/float(np.sum(class_counts)+(alpha*num_classes)))
         class_scores[c] = np.log(float(class_counts[c]+alpha)/float(np.sum(class_counts)+(alpha*num_classes)))
         for word in words:
             if(word in vocab):
-                #print "(#",word," in class/Total terms in class): ",feature_counts[c,vocab[word]],np.sum(feature_counts[c])
                 class_scores[c] += np.log(float(feature_counts[c,vocab[word]]+alpha)/float(np.sum(feature_counts[c])+(len(vocab)*alpha)))
             else:
                 class_scores[c] +=0
@@ -36,7 +34,7 @@ def predict(tweet_arr):
     feature_counts,class_counts,vocab = train(y_train,text_train)
     num_classes = len(class_counts)
     alpha = 1
-
+    #take in the tweet tuple and predict then intert predictions in tuple
     for ii in range(len(tweet_arr)):
         PredLabel = np.argmax(predict_log_score(tweet_arr[ii][1],feature_counts,class_counts,vocab,num_classes,alpha))
         if(PredLabel == 0):
